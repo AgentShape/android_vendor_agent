@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- system uid：权限检查按 system uid 通过，不声明特权权限（ADR-0022 第 3 条）。 -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="moe.uni.agent.framework"
+    android:sharedUserId="android.uid.system">
+    <!-- CompanionDeviceManager 要求调用方声明这个 feature。 -->
+    <uses-feature android:name="android.software.companion_device_setup" android:required="true" />
+
+    <!-- 剪贴板按包检查这个权限，system uid 也要自己申请（ADR-0029 第 6 条，2026-09-30 实测）。 -->
+    <uses-permission android:name="android.permission.READ_CLIPBOARD_IN_BACKGROUND" />
+    <!-- IWindowManager.mirrorDisplay 需要（signature，ADR-0031 第 6 条）。 -->
+    <uses-permission android:name="android.permission.READ_FRAME_BUFFER" />
+
+    <!-- 保护 IAgentScreen，只有同签名的 moe.uni.agent 能绑定。 -->
+    <permission android:name="moe.uni.agent.framework.permission.SCREEN" android:protectionLevel="signature" />
+    <!-- 保护 IAgentDevice（ADR-0029 第 6 条），同样只有同签名的 moe.uni.agent 能绑定。 -->
+    <permission android:name="moe.uni.agent.framework.permission.DEVICE" android:protectionLevel="signature" />
+
+    <!-- persistent：虚拟设备、虚拟屏幕的生命周期独立于 AgentApp。 -->
+    <application android:name=".FrameworkApp" android:persistent="true" android:allowBackup="false" android:label="@string/app_name">
+        <service android:name=".service.ScreenService" android:exported="true"
+            android:permission="moe.uni.agent.framework.permission.SCREEN" />
+        <service android:name=".service.DeviceService" android:exported="true"
+            android:permission="moe.uni.agent.framework.permission.DEVICE" />
+        <service android:name=".a11y.ScreenAccessibility" android:exported="true" android:label="@string/accessibility_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility" />
+        </service>
+        <!-- 以系统身份注册的通知监听（ADR-0034 第 4 条），不经绑定，不对外导出。 -->
+        <service android:name=".device.NotificationEvents" android:exported="false" />
+    </application>
+</manifest>

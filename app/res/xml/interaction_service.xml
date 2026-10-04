@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 系统助手的声明（ADR-0033 第 1 条）：sessionService 和 recognitionService 缺一个角色就不认；
+     不声明 usesAssist*，屏幕内容由 AgentFramework 提供（第 4 条）。 -->
+<voice-interaction-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sessionService="moe.uni.agent.assist.AgentSessionService"
+    android:recognitionService="moe.uni.agent.assist.AgentRecognitionService"
+    android:supportsAssist="true" />

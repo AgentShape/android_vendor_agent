@@ -1,0 +1,4 @@
+# 文档不进仓库
+docs/
+*.md
+AGENTS.md

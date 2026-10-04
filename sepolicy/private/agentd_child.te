@@ -1,0 +1,31 @@
+# exec 子进程与 fileop helper 的域（ADR-0008、ADR-0009）。
+# 只在 userdebug/eng 下为 permissive；v1 不加 dontaudit，avc 日志留作写正式策略的素材。
+type agentd_child, domain, coredomain;
+
+userdebug_or_eng(`
+    permissive agentd_child;
+')
+
+# agentd 只通过重新执行自身（agentd --exec / --fileop）拉起子进程，
+# 所以只需要这一条域切换规则。
+domain_auto_trans(agentd, agentd_exec, agentd_child)
+
+# 子进程继承 agentd 持有的输出管道。
+allow agentd_child agentd:fd use;
+allow agentd_child agentd:fifo_file { getattr write append ioctl };
+
+# 联网：bionic 的 connect() 会把 socket fd 交给 netd 的 fwmarkd 打标记，
+# netd 只接收 netdomain 的 fd，否则 fd 被内核丢弃，connect 返回 EMSGSIZE。
+net_domain(agentd_child)
+
+# 反方向的规则：permissive 只放行以 agentd_child 为源的检查，而 `cmd` 会把
+# stdin/stdout/stderr 的 fd 和回调 binder（ShellCallback、ResultReceiver）交给
+# system_server 等 enforcing 的服务端，由服务端检查（ADR-0006、ADR-0007）。
+# 平台在 userdebug 下给 su 的是全体 domain 的反向权限，并在各处 neverallow 里
+# 为 su 开了豁免；我们不能照搬到全体 domain，只放行 `cmd` 的服务端。
+# agentd 创建的输出管道也会被原样转交，所以同时放行对 agentd fifo 的写入。
+userdebug_or_eng(`
+    allow { system_server binderservicedomain } { agentd agentd_child }:fd use;
+    allow { system_server binderservicedomain } { agentd agentd_child }:fifo_file { write getattr append };
+    allow { system_server binderservicedomain } agentd_child:binder { call transfer };
+')

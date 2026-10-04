@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AgentApp 的界面文字（ADR-0025、ADR-0026 第 5 条）。给模型的文字不在这里。 -->
+<resources>
+    <string name="app_name">Agent</string>
+
+    <!-- 测试钩子：仓库外的驱动脚本按这些 content-desc 操作界面，改动时同步修改脚本。 -->
+    <string name="hook_menu" translatable="false">menu</string>
+    <string name="hook_new" translatable="false">new</string>
+    <string name="hook_prompt" translatable="false">prompt</string>
+    <string name="hook_send" translatable="false">send</string>
+    <string name="hook_stop" translatable="false">stop</string>
+    <string name="hook_settings" translatable="false">settings</string>
+    <string name="hook_tasks" translatable="false">tasks</string>
+    <string name="hook_result" translatable="false">result</string>
+    <string name="hook_assist_prompt" translatable="false">assist_prompt</string>
+    <string name="hook_assist_send" translatable="false">assist_send</string>
+    <string name="hook_assist_stop" translatable="false">assist_stop</string>
+    <string name="hook_assist_open" translatable="false">assist_open</string>
+    <string name="hook_assist_result" translatable="false">assist_result</string>
+
+    <!-- 抽屉 -->
+    <string name="new_chat">新对话</string>
+    <string name="group_today">今天</string>
+    <string name="group_yesterday">昨天</string>
+    <string name="group_week">7 天内</string>
+    <string name="group_earlier">更早</string>
+    <string name="untitled">未命名会话</string>
+    <string name="no_conversations">还没有会话</string>
+    <string name="running">运行中</string>
+    <string name="more">更多</string>
+    <string name="rename">重命名</string>
+    <string name="delete">删除</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="rename_title">重命名会话</string>
+    <string name="delete_title">删除会话？</string>
+    <string name="delete_message">“%1$s”会被永久删除。</string>
+    <string name="delete_running">正在运行的会话不能删除</string>
+    <string name="tasks">常驻任务</string>
+    <string name="settings">设置</string>
+
+    <!-- 会话页 -->
+    <string name="greeting">有什么可以帮你？</string>
+    <string name="greeting_detail">我以 root 身份操作这台设备：执行命令、读写文件、操作屏幕、管理常驻任务。</string>
+    <string name="input_hint">给 Agent 发消息</string>
+    <string name="other_running">另一个会话正在运行</string>
+    <string name="thinking">正在思考</string>
+    <string name="retry">重试</string>
+    <string name="copy">复制</string>
+    <string name="copied">已复制</string>
+    <string name="read_failed">这个会话无法读取</string>
+    <string name="tool_group">使用了 %1$d 个工具</string>
+    <string name="tool_running">运行中</string>
+    <string name="tool_ok">成功</string>
+    <string name="tool_failed">失败</string>
+    <string name="tool_arguments">参数</string>
+    <string name="tool_result">结果</string>
+
+    <!-- 设置页 -->
+    <string name="back">返回</string>
+    <string name="section_model">模型服务</string>
+    <string name="section_reasoning">推理</string>
+    <string name="section_permissions">权限</string>
+    <string name="base_url">API 地址</string>
+    <string name="base_url_hint">HTTPS，写到版本号一级，例如 https://host/v1</string>
+    <string name="model">模型</string>
+    <string name="api_key">API key</string>
+    <string name="api_key_saved">已保存；留空则保持不变</string>
+    <string name="root_shell">允许 Agent 直接使用 root shell</string>
+    <string name="root_shell_detail">开启后 Agent 可以用 exec 以 root 身份执行任意命令；关闭时只能使用预先定义的工具</string>
+    <string name="reasoning">保留推理状态</string>
+    <string name="reasoning_detail">请求 encrypted_content，跨轮保留推理内容</string>
+    <string name="effort">推理强度</string>
+    <string name="effort_default">默认</string>
+    <string name="saved">已保存，API key 已加密</string>
+    <string name="save_failed">保存失败，请重试</string>
+    <string name="save_running">Agent 正在运行，结束后才能保存</string>
+    <string name="invalid_base_url">API 地址格式不对</string>
+    <string name="invalid_base_url_https">API 地址必须是 HTTPS 地址</string>
+    <string name="invalid_model">请填写模型</string>
+    <string name="invalid_effort">推理强度无效</string>
+    <string name="invalid_key">请填写 API key</string>
+    <string name="invalid_context_window">上下文窗口必须是正整数</string>
+    <string name="context_window">上下文窗口（token）</string>
+    <string name="context_window_hint">接近上限时由模型压缩较早的对话，按所用模型填写</string>
+
+    <!-- 任务页 -->
+    <string name="refresh">刷新</string>
+    <string name="no_tasks">没有常驻任务</string>
+    <string name="stop_task">终止</string>
+    <string name="stop_task_title">终止任务？</string>
+    <string name="stop_task_message">任务 #%1$d 和它的后台进程会被终止。</string>
+    <string name="task_failed">操作失败，请重试</string>
+    <string name="task_running">运行中</string>
+    <string name="task_exited">已退出（%1$d）</string>
+    <string name="task_timed_out">已超时</string>
+    <string name="task_signaled">被信号终止（%1$d）</string>
+    <string name="task_orphans">%1$s，后台仍在运行</string>
+
+    <!-- 观察窗（ADR-0031）：通知渠道、conversation shortcut、气泡、会话页的提示 -->
+    <string name="watch_channel">观察窗</string>
+    <string name="watch_channel_description">Agent 使用虚拟屏幕时以气泡显示，点开可以看到它在做什么</string>
+    <string name="watch_shortcut">观察窗</string>
+    <string name="watch_user">你</string>
+    <string name="watch_message">正在操作虚拟屏幕，点开气泡查看</string>
+    <string name="watch_open">打开对话</string>
+    <string name="watch_connecting">正在连接虚拟屏幕</string>
+    <string name="watch_mirror_failed">暂时无法显示虚拟屏幕，收起气泡后再展开试试。</string>
+    <string name="watch_no_permission">没有通知权限，无法显示观察窗气泡。</string>
+    <string name="watch_bubbles_off">气泡已在系统设置中关闭，无法显示观察窗。</string>
+    <string name="watch_failed">观察窗气泡发送失败。</string>
+
+    <!-- 助手面板（ADR-0033） -->
+    <string name="assist_hint">问 Agent</string>
+
+    <!-- 主屏上的状态胶囊（ADR-0033 第 5 条）：agent 当前在做的一步 -->
+    <string name="status_look">正在查看屏幕</string>
+    <string name="status_tap">正在点按</string>
+    <string name="status_act">正在操作</string>
+    <string name="status_type">正在输入</string>
+    <string name="status_select">正在选择文字</string>
+    <string name="status_scroll">正在滚动</string>
+    <string name="status_swipe">正在滑动</string>
+    <string name="status_key">正在按键</string>
+    <string name="status_launch">正在打开应用</string>
+    <string name="status_move">正在移动任务</string>
+    <string name="close">关闭</string>
+
+    <!-- 运行失败的说明（AgentFailure.Reason），附加信息另起一行显示 -->
+    <string name="failure_not_configured">还没有设置模型服务。请在设置中填写 API 地址、模型和 API key。</string>
+    <string name="failure_key_unreadable">无法读取已保存的 API key，请在设置中重新填写。</string>
+    <string name="failure_network">无法连接到模型服务，请检查网络连接。</string>
+    <string name="failure_host_unresolved">找不到模型服务的地址。请检查网络连接，或在设置中核对 API 地址。</string>
+    <string name="failure_timeout">模型服务长时间没有响应，请稍后重试。</string>
+    <string name="failure_tls">无法与模型服务建立安全连接，请在设置中核对 API 地址。</string>
+    <string name="failure_connection_lost">与模型服务的连接中断了，请重试。</string>
+    <string name="failure_unauthorized">API key 无效或没有权限，请在设置中检查。</string>
+    <string name="failure_not_found">找不到这个接口或模型，请在设置中核对 API 地址和模型。</string>
+    <string name="failure_rate_limited">请求太频繁或额度已用完，请稍后重试。</string>
+    <string name="failure_server">模型服务暂时不可用，请稍后重试。</string>
+    <string name="failure_rejected">模型服务拒绝了这次请求。</string>
+    <string name="failure_bad_response">模型服务返回了无法识别的内容，请确认 API 地址支持 Responses 接口。</string>
+    <string name="failure_model_failed">模型生成回复时出错，请重试。</string>
+    <string name="failure_context_overflow">对话超过了模型的上下文窗口。请在设置中调小上下文窗口后重试，或新建对话。</string>
+    <string name="failure_agentd">系统服务 agentd 不可用，请稍后重试。</string>
+    <string name="failure_agent_framework">屏幕控制服务不可用，请稍后重试。</string>
+    <string name="failure_screen_setup">无法创建虚拟屏幕，请稍后重试。</string>
+    <string name="failure_unexpected">出现了意外错误，请重试。</string>
+</resources>

@@ -1,0 +1,22 @@
+# moe.uni.agent 的专用域（ADR-0010），模板是 Lineage 的 updater_app。
+type agent_app, domain, coredomain;
+
+app_domain(agent_app)
+net_domain(agent_app)
+
+allow agent_app app_api_service:service_manager find;
+allow agent_app system_api_service:service_manager find;
+
+allow agent_app app_data_file:dir create_dir_perms;
+allow agent_app app_data_file:{ file lnk_file } create_file_perms;
+
+# 只有 agent_app 能找到 agentd（ADR-0010）。
+allow agent_app agentd_service:service_manager find;
+binder_call(agent_app, agentd)
+
+# exec 交给调用方的输出管道读端和 stdin 管道写端，都是 agentd 创建的 fifo（ADR-0020）。
+allow agent_app agentd:fd use;
+allow agent_app agentd:fifo_file { read write getattr };
+
+# 截图由 AgentFramework 放进 memfd 交给 app（ADR-0022 第 2 条）。memfd 本身的读取已由 app_domain 放行。
+allow agent_app agent_framework:fd use;

@@ -1,0 +1,7 @@
+// framework-res 的配置覆盖（ADR-0033 第 1、2 条）：默认助手、电源键长按唤起助手。
+// 放在 system_ext：静态 overlay 按 system、vendor、odm、oem、product、system_ext 的顺序应用，
+// 能覆盖 Lineage 在 product 分区的自动 RRO（config_longPressOnPowerBehavior=1）。
+runtime_resource_overlay {
+    name: "AgentFrameworkOverlay",
+    system_ext_specific: true,
+}

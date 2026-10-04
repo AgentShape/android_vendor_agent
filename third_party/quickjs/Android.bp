@@ -1,0 +1,21 @@
+// QuickJS 2026-06-04（https://bellard.org/quickjs/，MIT，见 LICENSE），屏幕脚本的 JS 引擎（ADR-0024）。
+// 只编入引擎本身，不含 quickjs-libc：脚本没有文件、网络和进程能力。源码未修改。
+cc_library_static {
+    name: "libquickjs_agent",
+    srcs: [
+        "cutils.c",
+        "dtoa.c",
+        "libregexp.c",
+        "libunicode.c",
+        "quickjs.c",
+    ],
+    export_include_dirs: ["."],
+    cflags: [
+        "-D_GNU_SOURCE",
+        "-DCONFIG_VERSION=\"2026-06-04\"",
+        "-fwrapv",
+        // 引擎用 malloc_usable_size 统计内存，与 _FORTIFY_SOURCE=3 不兼容（bionic 的限制）。
+        "-U_FORTIFY_SOURCE",
+        "-D_FORTIFY_SOURCE=2",
+    ],
+}

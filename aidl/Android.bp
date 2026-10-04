@@ -1,0 +1,49 @@
+// agentd 与 moe.uni.agent 之间的契约（ADR-0007）。
+// 两端在同一仓库、同一镜像中，因此使用 unstable。
+aidl_interface {
+    name: "agentd_aidl_interface",
+    unstable: true,
+    local_include_dir: ".",
+    srcs: [
+        "moe/uni/agent/agentd/*.aidl",
+    ],
+    backend: {
+        cpp: {
+            enabled: false,
+        },
+        ndk: {
+            enabled: false,
+        },
+        java: {
+            enabled: true,
+            platform_apis: true,
+        },
+        rust: {
+            enabled: true,
+        },
+    },
+}
+
+// AgentFramework 与 moe.uni.agent 之间的契约（ADR-0022），同样是 unstable，只有 java 后端。
+// include_dirs：ScreenMirror 引用 framework 的 android.view.SurfaceControl（ADR-0031）。
+aidl_interface {
+    name: "agent_framework_aidl_interface",
+    unstable: true,
+    local_include_dir: ".",
+    include_dirs: ["frameworks/base/core/java"],
+    srcs: [
+        "moe/uni/agent/framework/*.aidl",
+    ],
+    backend: {
+        cpp: {
+            enabled: false,
+        },
+        ndk: {
+            enabled: false,
+        },
+        java: {
+            enabled: true,
+            platform_apis: true,
+        },
+    },
+}

@@ -1,0 +1,18 @@
+rust_binary {
+    name: "agentd",
+    crate_name: "agentd",
+    srcs: ["src/main.rs"],
+    edition: "2021",
+    rustlibs: [
+        "agentd_aidl_interface-rust",
+        "libandroid_logger",
+        "libbinder_rs",
+        "liblibc",
+        "liblog_rust",
+        "librustutils",
+    ],
+    // Rust 依赖静态链进二进制，不往 /system 装额外的 dylib。
+    prefer_rlib: true,
+    init_rc: ["agentd.rc"],
+    system_ext_specific: true,
+}

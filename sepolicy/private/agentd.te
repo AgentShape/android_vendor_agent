@@ -1,0 +1,14 @@
+# agentd 守护进程（ADR-0009）：保持 enforcing，策略参照 adbroot.te。
+type agentd, domain, coredomain;
+type agentd_exec, exec_type, file_type, system_file_type;
+
+init_daemon_domain(agentd)
+
+binder_use(agentd)
+binder_service(agentd)
+add_service(agentd, agentd_service)
+
+# 子进程管理：放进独立进程组，整组发信号，并探测进程组是否还有成员。
+# 只允许向 agentd_child 发信号，所以 pgid 被无关进程复用时也发不到别的域（ADR-0009）。
+allow agentd self:process { setpgid getpgid };
+allow agentd agentd_child:process { sigkill sigstop sigchld signal signull getpgid };

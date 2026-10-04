@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 助手会话窗口（ADR-0033 第 3 条）：输入法由面板的 imePadding 让开，窗口不平移也不缩小。
+         必须放在主题里：会话窗口在 onCreateContentView 之前就已加入，之后再 setSoftInputMode 会在窗口变为可见时被
+         ViewRootImpl 按加入时的 unspecified 重新推算成 pan 覆盖掉。 -->
+    <style name="Theme.Agent.AssistSession" parent="@*android:style/Theme.DeviceDefault.VoiceInteractionSession">
+        <item name="android:windowSoftInputMode">adjustNothing</item>
+        <!-- 父主题打开了半透明的状态栏和导航栏，会在屏幕底边画一条深色的导航栏背景，挡住唤起光带。 -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
+    </style>
+</resources>

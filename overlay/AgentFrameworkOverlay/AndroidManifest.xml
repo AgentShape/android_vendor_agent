@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="moe.uni.agent.overlay.framework">
+    <overlay android:isStatic="true" android:priority="0" android:targetPackage="android" />
+</manifest>

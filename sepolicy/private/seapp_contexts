@@ -1,0 +1,4 @@
+# moe.uni.agent
+user=_app isPrivApp=true seinfo=platform name=moe.uni.agent domain=agent_app type=app_data_file levelFrom=user
+# moe.uni.agent.framework：system uid 的屏幕控制进程（ADR-0022），模板是 DeviceAsWebcam
+user=system seinfo=platform isPrivApp=true name=moe.uni.agent.framework domain=agent_framework type=system_app_data_file

@@ -1,0 +1,5 @@
+# libagentjs 按名字回调 ScriptEngine.Host.call（ADR-0024），R8 不能改名或删除。
+-keep interface moe.uni.agent.tools.js.ScriptEngine$Host { *; }
+-keep class * implements moe.uni.agent.tools.js.ScriptEngine$Host {
+    byte[] call(java.lang.String, byte[]);
+}

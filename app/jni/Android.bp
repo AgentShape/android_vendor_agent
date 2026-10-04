@@ -1,0 +1,8 @@
+// exec_js 的 QuickJS JNI 桥（ADR-0024），随 AgentApp 安装。
+cc_library_shared {
+    name: "libagentjs",
+    srcs: ["agentjs.c"],
+    static_libs: ["libquickjs_agent"],
+    header_libs: ["jni_headers"],
+    system_ext_specific: true,
+}

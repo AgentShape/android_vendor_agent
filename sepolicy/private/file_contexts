@@ -1,0 +1,1 @@
+/(system_ext|system/system_ext)/bin/agentd      u:object_r:agentd_exec:s0

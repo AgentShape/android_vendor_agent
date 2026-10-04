@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Agent Framework</string>
+    <!-- 显示在系统无障碍设置里。 -->
+    <string name="accessibility_label">Agent 屏幕控制</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 默认助手（ADR-0033 第 1 条）：首次开机由 PermissionController 授予 ASSISTANT 角色，用户可在"默认应用"里更换。 -->
+    <string name="config_defaultAssistant" translatable="false">moe.uni.agent</string>
+
+    <!-- 电源键长按唤起助手（ADR-0033 第 2 条，用户决定），与 AOSP 默认一致；电源菜单改用电源+音量上或快捷设置。
+         没有助手时 PhoneWindowManager 退回电源菜单。 -->
+    <integer name="config_longPressOnPowerBehavior">5</integer>
+</resources>

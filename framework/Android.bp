@@ -1,0 +1,18 @@
+// moe.uni.agent.framework：屏幕控制的执行进程（ADR-0022）。system uid，持有虚拟设备、虚拟屏幕和无障碍服务。
+android_app {
+    name: "AgentFramework",
+
+    srcs: ["src/**/*.kt"],
+    manifest: "AndroidManifest.xml",
+
+    platform_apis: true,
+    privileged: true,
+    privapp_allowlist: "moe.uni.agent.framework.xml",
+    certificate: "platform",
+    system_ext_specific: true,
+
+    static_libs: [
+        "agentd_aidl_interface-java",
+        "agent_framework_aidl_interface-java",
+    ],
+}

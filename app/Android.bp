@@ -1,0 +1,39 @@
+// moe.uni.agent：agent loop 所在的 priv-app（ADR-0001、ADR-0014）。
+// 模板是 packages/apps/Updater/app/Android.bp。
+android_app {
+    name: "AgentApp",
+
+    srcs: ["src/**/*.kt"],
+    manifest: "AndroidManifest.xml",
+    // exec_js 的 JS prelude（ADR-0024）。
+    asset_dirs: ["assets"],
+    jni_libs: ["libagentjs"],
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+
+    platform_apis: true,
+    privileged: true,
+    privapp_allowlist: "moe.uni.agent.xml",
+    certificate: "platform",
+    system_ext_specific: true,
+
+    // 会话数据库（ADR-0027）。
+    plugins: ["androidx.room_room-compiler-plugin"],
+
+    static_libs: [
+        "agentd_aidl_interface-java",
+        "agent_framework_aidl_interface-java",
+        "androidx.activity_activity-compose",
+        "androidx.compose.foundation_foundation",
+        "androidx.compose.material3_material3",
+        "androidx.compose.material_material-icons-core",
+        "androidx.compose.runtime_runtime",
+        "androidx.compose.ui_ui",
+        "androidx.room_room-runtime",
+        "androidx.sqlite_sqlite",
+        "androidx.sqlite_sqlite-framework",
+        "kotlinx-coroutines-android",
+        "kotlinx-coroutines-core",
+    ],
+}

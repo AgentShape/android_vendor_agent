@@ -1,0 +1,14 @@
+# moe.uni.agent.framework 的专用域（ADR-0022 第 2 条），模板是 device_as_webcam（system uid 的独立 app 域）。
+type agent_framework, domain, coredomain, mlstrustedsubject;
+
+app_domain(agent_framework)
+
+allow agent_framework system_app_data_file:dir create_dir_perms;
+allow agent_framework system_app_data_file:{ file lnk_file } create_file_perms;
+
+# 虚拟设备、显示、输入、无障碍、task 管理、截图等都是 system_server 的服务。
+allow agent_framework { app_api_service system_api_service }:service_manager find;
+
+# 调用 agentd 创建屏幕的 CDM 关联（ADR-0029 第 7 条）；agentd 按 SID 放行 agent_framework。
+allow agent_framework agentd_service:service_manager find;
+binder_call(agent_framework, agentd)

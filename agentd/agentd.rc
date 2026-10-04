@@ -1,0 +1,4 @@
+service agentd /system_ext/bin/agentd
+    class main
+    user root
+    group root
